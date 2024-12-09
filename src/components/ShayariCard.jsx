@@ -9,7 +9,7 @@ export function ShayariCard({ shayari }) {
 
   const handleLike = async () => {
     try {
-      const response = await axios.post(`http://localhost:3000/api/shayari/${shayari._id}/like`, { method: 'POST' });
+      const response = await axios.post(`https://shayarians-backend.onrender.com/api/shayari/${shayari._id}/like`, { method: 'POST' });
       if (response.status === 200) {
         setLikes((prev) => prev + 1);
       }

@@ -11,8 +11,8 @@ function Home() {
   const fetchShayaris = async () => {
     try {
       const url = selectedGenre && selectedGenre !== 'All' 
-        ? `http://localhost:3000/api/shayari?genre=${selectedGenre}`
-        : 'http://localhost:3000/api/shayari';
+        ? `https://shayarians-backend.onrender.com/api/shayari?genre=${selectedGenre}`
+        : 'https://shayarians-backend.onrender.com/api/shayari';
   
       const response = await axios.get(url, {
         headers: {
@@ -20,8 +20,8 @@ function Home() {
         }
       });
   
-      console.log('------API Response Status:---------', response.status);
-      console.log('-----=API Response Data:------', response.data);
+      // console.log('------API Response Status:---------', response.status);
+      // console.log('-----=API Response Data:------', response.data);
   
       if (Array.isArray(response.data)) {
         setShayaris(response.data);

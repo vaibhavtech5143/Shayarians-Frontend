@@ -25,7 +25,7 @@ export function Upload() {
     setLoading(true) // Set loading to true when the request starts
 
     try {
-      const response = await fetch('http://localhost:3000/api/shayari/', {
+      const response = await fetch('https://shayarians-backend.onrender.com/api/shayari/', {
         method: 'POST',
         body: data
       })

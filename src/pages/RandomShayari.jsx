@@ -7,7 +7,7 @@ function RandomShayari() {
 
   const fetchRandomShayari = useCallback(async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/shayari/random');
+      const response = await fetch('https://shayarians-backend.onrender.com/api/shayari/random');
 
       if (!response.ok) {
         throw new Error('Failed to fetch random shayari');

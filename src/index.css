@@ -2,28 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  /* For WebKit browsers - Custom Scrollbar */
-  .scrollable-content::-webkit-scrollbar {
-    width: 6px; /* Thin scrollbar */
-  }
-
-  .scrollable-content::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
-  }
-
-  .scrollable-content::-webkit-scrollbar-thumb {
-    background: linear-gradient(to bottom, #a855f7, #9333ea); /* Purple gradient */
-    border-radius: 10px;
-  }
-
-  .scrollable-content::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(to bottom, #9333ea, #a855f7);
-  }
-
-  /* Hide scrollbars in WebKit browsers */
-  body::-webkit-scrollbar {
-    display: none;
-  }
-}

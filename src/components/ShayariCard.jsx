@@ -93,6 +93,7 @@ export function ShayariCard({ shayari }) {
             className="bg-gray-100 w-full h-48 flex items-center justify-center rounded-lg mb-4 overflow-hidden cursor-pointer"
             onClick={openModal}
           >
+           
             <p className="text-gray-800 text-lg italic truncate">{shayari.shayariTxt}</p>
           </div>
 
@@ -107,6 +108,7 @@ export function ShayariCard({ shayari }) {
                 className="scrollable-content max-w-full max-h-[90vh] overflow-auto p-8 bg-white rounded-lg shadow-lg backdrop-blur-lg"
                 onClick={(e) => e.stopPropagation()}
               >
+              <p className= "text-purple-700 text-lg italic truncate text-center">{shayari.title}</p>
                 {/* Shayari Text */}
                 <p className="text-gray-900 mt-4 text-lg whitespace-pre-line">
                   {shayari.shayariTxt}

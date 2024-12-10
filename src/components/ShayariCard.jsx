@@ -38,7 +38,7 @@ export function ShayariCard({ shayari }) {
               onClick={closeModal}
             >
               <div
-                className="relative max-w-full max-h-[90vh] overflow-auto p-2"
+                className="scrollable-content relative max-w-full max-h-[90vh] overflow-auto p-2 bg-black rounded-lg"
                 onClick={(e) => e.stopPropagation()}
               >
                 <button
@@ -47,11 +47,17 @@ export function ShayariCard({ shayari }) {
                 >
                   ×
                 </button>
+
                 <img
                   src={shayari.imageUrl}
                   alt={shayari.title}
-                  className="max-w-full max-h-[90vh] object-contain"
+                  className="max-w-full max-h-[70vh] object-contain mt-4"
                 />
+
+                {/* Shayari Text */}
+                <p className="text-gray-300 mt-4 text-lg whitespace-pre-line">
+                  {shayari.shayariTxt}
+                </p>
               </div>
             </div>
           )}
@@ -66,28 +72,27 @@ export function ShayariCard({ shayari }) {
           </div>
 
           {isModalOpen && (
-  <div
-    className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
-    onClick={closeModal}
-  >
-    <div
-      className="scrollable-content relative max-w-full max-h-[90vh] overflow-auto p-2"
-      onClick={(e) => e.stopPropagation()}
-    >
-      <button
-        onClick={closeModal}
-        className="absolute top-0 right-0 text-white text-4xl font-bold bg-black rounded-full w-10 h-10 flex items-center justify-center"
-      >
-        ×
-      </button>
-      <img
-        src={shayari.imageUrl}
-        alt={shayari.title}
-        className="max-w-full max-h-[90vh] object-contain"
-      />
-    </div>
-  </div>
-)}
+            <div
+              className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
+              onClick={closeModal}
+            >
+              <div
+                className="scrollable-content relative max-w-full max-h-[90vh] overflow-auto p-2 bg-black rounded-lg"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  onClick={closeModal}
+                  className="absolute top-0 right-0 text-white text-4xl font-bold bg-black rounded-full w-10 h-10 flex items-center justify-center"
+                >
+                  ×
+                </button>
+
+                <p className="text-gray-300 mt-4 text-lg whitespace-pre-line">
+                  {shayari.shayariTxt}
+                </p>
+              </div>
+            </div>
+          )}
         </>
       )}
 

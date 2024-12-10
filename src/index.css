@@ -21,9 +21,9 @@
   .scrollable-content::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(to bottom, #9333ea, #a855f7);
   }
-  
+
   /* Hide scrollbars in WebKit browsers */
-  /* body::-webkit-scrollbar {
+  body::-webkit-scrollbar {
     display: none;
-  } */
+  }
 }

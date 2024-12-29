@@ -34,14 +34,14 @@ export function Navbar() {
 
           {/* Desktop Navigation Links */}
           <div className="hidden lg:flex space-x-4">
-            {['Home', 'Upload', 'Random Shayari','confession'].map((item) => (
+            {['Home', 'Upload', 'Random Shayari','Confession'].map((item) => (
               <Link
-                key={item}
-                to={item === 'Upload' ? '/upload' : item === 'Random Shayari' ? '/random' : '/'}
-                className="text-gray-700 hover:text-purple-600"
-              >
-                {item}
-              </Link>
+              key={item}
+              to={item === 'Upload' ? '/upload' : item === 'Random Shayari' ? '/random' : item === 'Confession' ? '/confession' : '/'}
+              className="text-gray-700 hover:text-purple-600"
+            >
+              {item}
+            </Link>
             ))}
           </div>
         </div>
@@ -52,13 +52,13 @@ export function Navbar() {
         <div className="flex flex-col items-center py-4 space-y-4">
           {['Home', 'Upload', 'Random Shayari'].map((item) => (
             <Link
-              key={item}
-              to={item === 'Upload' ? '/upload' : item === 'Random Shayari' ? '/random' : '/'}
-              className="text-gray-700 hover:text-purple-600"
-              onClick={() => setIsMobileMenuOpen(false)} // Close menu after clicking
-            >
-              {item}
-            </Link>
+            key={item}
+            to={item === 'Upload' ? '/upload' : item === 'Random Shayari' ? '/random' : item === 'Confession' ? '/confession' : '/'}
+            className="text-gray-700 hover:text-purple-600"
+            onClick={() => setIsMobileMenuOpen(false)} // Close menu after clicking
+          >
+            {item}
+          </Link>
           ))}
         </div>
       </div>

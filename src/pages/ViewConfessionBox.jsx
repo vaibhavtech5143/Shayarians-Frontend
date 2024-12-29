@@ -6,14 +6,17 @@ const ViewConfessions = ({ onNavigateBack }) => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [confessionsPerPage] = useState(5); // Number of confessions per page
+  const [confessionsPerPage] = useState(5);
+  const [selectedConfession, setSelectedConfession] = useState(null); // For modal
 
   useEffect(() => {
     const fetchConfessions = async () => {
       setLoading(true);
       setErrorMessage(null);
       try {
-        const response = await axios.get('https://shayarians-backend.onrender.com/api/confessions');
+        const response = await axios.get(
+          'https://shayarians-backend.onrender.com/api/confessions'
+        );
         if (Array.isArray(response.data)) {
           setConfessions(response.data);
         } else {
@@ -21,7 +24,9 @@ const ViewConfessions = ({ onNavigateBack }) => {
         }
       } catch (error) {
         console.error('Error fetching confessions:', error);
-        const message = error.response?.data?.message || 'Failed to load confessions. Please try again.';
+        const message =
+          error.response?.data?.message ||
+          'Failed to load confessions. Please try again.';
         setErrorMessage(message);
         setConfessions([]);
       } finally {
@@ -35,16 +40,12 @@ const ViewConfessions = ({ onNavigateBack }) => {
   // Handle pagination logic
   const indexOfLastConfession = currentPage * confessionsPerPage;
   const indexOfFirstConfession = indexOfLastConfession - confessionsPerPage;
-  const currentConfessions = confessions.slice(indexOfFirstConfession, indexOfLastConfession);
+  const currentConfessions = confessions.slice(
+    indexOfFirstConfession,
+    indexOfLastConfession
+  );
 
-  // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  // Handle refresh
-  const handleRefresh = () => {
-    setCurrentPage(1); // Reset to first page after refresh
-    fetchConfessions();
-  };
 
   const handleSupport = (id) => {
     setConfessions((prevConfessions) =>
@@ -55,6 +56,10 @@ const ViewConfessions = ({ onNavigateBack }) => {
       )
     );
   };
+
+  const handleOpenModal = (confession) => setSelectedConfession(confession);
+
+  const handleCloseModal = () => setSelectedConfession(null);
 
   return (
     <div className="flex flex-col justify-start items-center min-h-screen bg-white">
@@ -73,13 +78,19 @@ const ViewConfessions = ({ onNavigateBack }) => {
             {currentConfessions.map((confession) => (
               <li
                 key={confession._id}
-                className="p-6 border-2 border-gray-200 rounded-lg shadow-lg bg-gray-50 text-gray-700"
+                className="p-6 border-2 border-gray-200 rounded-lg shadow-lg bg-gray-50 text-gray-700 cursor-pointer"
+                onClick={() => handleOpenModal(confession)}
               >
-                <p className="text-lg sm:text-xl font-medium">{confession.content}</p>
+                <p className="text-lg sm:text-xl font-medium truncate">
+                  {confession.content}
+                </p>
                 <div className="flex items-center mt-4">
                   <button
                     className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 sm:px-6 rounded-full focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50"
-                    onClick={() => handleSupport(confession._id)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleSupport(confession._id);
+                    }}
                   >
                     Support
                   </button>
@@ -93,7 +104,6 @@ const ViewConfessions = ({ onNavigateBack }) => {
         )}
 
         <div className="flex justify-between items-center mt-8 sm:mt-12">
-          {/* Pagination Controls */}
           <div className="flex space-x-4">
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full"
@@ -110,17 +120,7 @@ const ViewConfessions = ({ onNavigateBack }) => {
               Next
             </button>
           </div>
-
-          {/* Refresh Button */}
-          <button
-            className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-full"
-            onClick={handleRefresh}
-          >
-            Refresh
-          </button>
         </div>
-
-        {/* Back Button */}
         <div className="flex justify-center mt-8 sm:mt-12">
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
@@ -130,6 +130,24 @@ const ViewConfessions = ({ onNavigateBack }) => {
           </button>
         </div>
       </div>
+
+      {/* Modal */}
+      {selectedConfession && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white rounded-lg p-6 w-11/12 max-w-2xl relative">
+            <button
+              className="absolute top-2 right-2 text-gray-700 hover:text-gray-900 text-2xl font-bold"
+              onClick={handleCloseModal}
+            >
+              ×
+            </button>
+            <h2 className="text-xl font-bold mb-4">Confession</h2>
+            <p className="text-gray-800 text-lg whitespace-pre-line">
+              {selectedConfession.content}
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

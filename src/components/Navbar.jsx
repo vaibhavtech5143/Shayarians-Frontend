@@ -18,9 +18,17 @@ export function Navbar() {
           {/* Hamburger Menu Icon for Mobile */}
           <div className="lg:hidden">
             <button onClick={toggleMobileMenu} className="text-gray-700">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+            <svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  strokeWidth="2"
+  strokeLinecap="round"
+  strokeLinejoin="round"
+>
+  <path d="M12 2L2 12h3v8h8v-8h3L12 2z" />
+</svg>
             </button>
           </div>
 

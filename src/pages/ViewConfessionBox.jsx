@@ -133,21 +133,21 @@ const ViewConfessions = ({ onNavigateBack }) => {
 
       {/* Modal */}
       {selectedConfession && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white rounded-lg p-6 w-11/12 max-w-2xl relative">
-            <button
-              className="absolute top-2 right-2 text-gray-700 hover:text-gray-900 text-2xl font-bold"
-              onClick={handleCloseModal}
-            >
-              ×
-            </button>
-            <h2 className="text-xl font-bold mb-4">Confession</h2>
-            <p className="text-gray-800 text-lg whitespace-pre-line">
-              {selectedConfession.content}
-            </p>
-          </div>
-        </div>
-      )}
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div className="bg-white rounded-lg p-6 w-11/12 max-w-2xl relative overflow-hidden">
+      <button
+        className="absolute top-2 right-2 text-gray-700 hover:text-gray-900 text-2xl font-bold"
+        onClick={handleCloseModal}
+      >
+        ×
+      </button>
+      <h2 className="text-xl font-bold mb-4">Confession</h2>
+      <div className="text-gray-800 text-lg whitespace-pre-line overflow-y-auto max-h-96">
+        {selectedConfession.content}
+      </div>
+    </div>
+  </div>
+)}
     </div>
   );
 };
